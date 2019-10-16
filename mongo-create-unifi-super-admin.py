@@ -36,8 +36,11 @@ if args.email is not None and args.password is not None and args.username is not
     admin_list = mdb.admin.find()
     print "Promoting Admin to Super Admin..."
     for admin in admin_list:
-        if admin["email"] == args.email:
-            new_admin_id = str(admin["_id"])
+        try:
+            if admin["email"] == args.email:
+                new_admin_id = str(admin["_id"])
+        except:
+            continue
     for site in db_dump:
         site_id = str(site["_id"])
         site_ids.append(site_id)
